@@ -4,7 +4,7 @@
     "description": "Island.is Identification and Authentication Services (Login) for Node.js",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "node_modules/.bin/jest"
     },
     "repository": {
         "type": "git",
@@ -26,12 +26,16 @@
     },
     "homepage": "https://github.com/mojoweb/islandis-login#readme",
     "dependencies": {
-        "@fidm/x509": "^1.2.1",
-        "xml-crypto": "^1.4.0",
-        "xml2js": "^0.4.23",
-        "xmldom": "^0.3.0"
+      "@fidm/x509": "^1.2.1",
+      "xml-crypto": "^1.4.0",
+      "xml2js": "^0.4.23",
+      "xmldom": "^0.3.0"
     },
     "devDependencies": {
-        "prettier": "^1.19.1"
+      "jest": "^26.0.1",
+      "eslint": "^6.8.0",
+      "eslint-config-airbnb-base": "^14.1.0",
+      "eslint-plugin-import": "^2.21.1",
+      "prettier": "^1.19.1"
     }
 }
