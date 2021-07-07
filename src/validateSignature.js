@@ -15,7 +15,7 @@ const { CertificateError } = require('./error.js');
 
 /* eslint new-cap: ["error", { "newIsCap": false }] */
 const TrustedCertificate = Certificate.fromPEM(
-  readFileSync(path.resolve(__dirname, '../cert/TrustedCertificate.pem')),
+  readFileSync(path.resolve(__dirname, '../cert/FullgiltAudkenni.pem')),
 );
 
 /**
