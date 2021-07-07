@@ -14,8 +14,8 @@ const { CertificateError } = require('./error.js');
  */
 
 /* eslint new-cap: ["error", { "newIsCap": false }] */
-const FullgiltAudkenni = Certificate.fromPEM(
-  readFileSync(path.resolve(__dirname, '../cert/FullgiltAudkenni.pem')),
+const TrustedCertificate = Certificate.fromPEM(
+  readFileSync(path.resolve(__dirname, '../cert/TrustedCertificate.pem')),
 );
 
 /**
@@ -47,7 +47,7 @@ function isCertificateDataValid(cert) {
   const { organizationName } = cert.issuer;
   const { validFrom, validTo } = cert;
 
-  if (serialName !== '5210002790' || organizationName !== 'Audkenni hf.') {
+  if (serialName !== '6503760649' || organizationName !== 'Audkenni hf.') {
     return false;
   }
 
@@ -78,13 +78,13 @@ function checkSignature(doc, pem, xml) {
 }
 
 function isCertificateValid(certificate) {
-  // we only need to verify FullgiltAudkenni cert because that is the cert used
+  // we only need to verify TrustedCertificate cert because that is the cert used
   // to sign the message from Island.is
   if (
-    FullgiltAudkenni.verifySubjectKeyIdentifier()
+    TrustedCertificate.verifySubjectKeyIdentifier()
         && certificate.verifySubjectKeyIdentifier()
-        && FullgiltAudkenni.checkSignature(certificate) === null
-        && certificate.isIssuer(FullgiltAudkenni)
+        && TrustedCertificate.checkSignature(certificate) === null
+        && certificate.isIssuer(TrustedCertificate)
   ) {
     return true;
   }
