@@ -14,8 +14,8 @@ const { CertificateError } = require('./error.js');
  */
 
 /* eslint new-cap: ["error", { "newIsCap": false }] */
-const TrausturBunadur = Certificate.fromPEM(
-  readFileSync(path.resolve(__dirname, '../cert/TrausturBunadur.pem')),
+const FullgiltAudkenni = Certificate.fromPEM(
+  readFileSync(path.resolve(__dirname, '../cert/FullgiltAudkenni.pem')),
 );
 
 /**
@@ -47,7 +47,7 @@ function isCertificateDataValid(cert) {
   const { organizationName } = cert.issuer;
   const { validFrom, validTo } = cert;
 
-  if (serialName !== '6503760649' || organizationName !== 'Audkenni ehf.') {
+  if (serialName !== '5210002790' || organizationName !== 'Audkenni hf.') {
     return false;
   }
 
@@ -78,13 +78,13 @@ function checkSignature(doc, pem, xml) {
 }
 
 function isCertificateValid(certificate) {
-  // we only need to verify TrausturBunadur cert because that is the cert used
+  // we only need to verify FullgiltAudkenni cert because that is the cert used
   // to sign the message from Island.is
   if (
-    TrausturBunadur.verifySubjectKeyIdentifier()
+    FullgiltAudkenni.verifySubjectKeyIdentifier()
         && certificate.verifySubjectKeyIdentifier()
-        && TrausturBunadur.checkSignature(certificate) === null
-        && certificate.isIssuer(TrausturBunadur)
+        && FullgiltAudkenni.checkSignature(certificate) === null
+        && certificate.isIssuer(FullgiltAudkenni)
   ) {
     return true;
   }
@@ -127,7 +127,7 @@ function validate(xml, signature) {
     if (!isCertificateValid(cert)) {
       return reject(
         new CertificateError(
-          'The XML document is not signed by Þjóðskrá Íslands.',
+          'The XML document is not signed by Auðkenni.',
         ),
       );
     }
